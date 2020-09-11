@@ -1,0 +1,74 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+class time_12
+{
+	int hrs,mins;
+	bool pm;
+	public:
+		time_12():hrs(0),mins(0),pm(true)
+		{ }
+		time_12(bool ap,int h,int m):pm(ap),hrs(h),mins(m)
+		{ }
+		void display()
+		{
+			cout<<hrs<<":";
+			cout<<mins;
+			string am_pm=pm?"P.M.":"A.M.";
+			cout<<am_pm;
+		}
+};
+class time_24
+{
+	int hours,minutes,seconds;
+	public:
+		time_24():hours(0),minutes(0),seconds(0)
+		{
+		}
+		time_24(int h,int m,int s):hours(h),minutes(m),seconds(s)
+		{
+		}
+		void get_time()
+		{
+			cout<<"enter 24-hours time:"<<endl;
+			cin>>hours;
+			if(hours>23)
+			{
+				exit(1);
+			}
+			cout<<"minutes:"<<endl;
+			cin>>minutes;
+			cout<<"seconds:"<<seconds<<endl;
+		}
+		void display()
+		{
+			cout<<hours<<":"<<minutes<<":"<<seconds<<endl;
+		}
+		operator time_12()
+		{
+			bool pm=hours<12?false:true;
+			time_12.mins=seconds<30?minutes:minutes+1;
+			if(time_12.mins==60)
+			{
+				time_12.mins=0;
+				++hrs;
+			}
+			time_12.hrs=(hours<13)?hours:hours-12;
+			if(time_12.hrs==0)
+			{
+				time_12.hrs=12;
+			}
+		 } 
+};
+int main()
+{
+	time_12 t1;
+	time_24 t2;
+	t2.get_time();
+	cout<<"you entered:";
+	t2.display();
+	t1=t2;
+	t1.display();
+	return 0;
+}
