@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+
+class polygon
+{
+	protected:
+		int width;
+		int height;
+	public:
+		void set_value()
+		{
+			cout<<"Enter width"<<endl;
+			cin>>width;
+			cout<<"Enter height"<<endl;
+			cin>>height;
+		}
+		virtual void area()
+		{
+		}
+};
+class rectangle:public polygon
+{
+	public:
+	void area()
+	{
+		cout<<"area of rectangle: "<<width*height<<endl;
+	}
+};
+class triangle:public polygon
+{
+	public:
+		void area()
+		{
+			cout<<"area of triangle: "<<(width*height)/2<<endl;
+		}
+};
+int main()
+{
+	polygon *p;
+	rectangle r;
+	triangle t;
+	p=&r;
+	p->set_value();
+	p->area();
+	p=&t;
+	p->set_value();
+	p->area();
+	return 0;
+}
