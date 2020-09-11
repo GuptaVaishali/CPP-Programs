@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+
+class base
+{
+	private:
+		int data;
+	public:
+		base():data(99){
+		}
+		friend class derv;
+};
+class derv:public base
+{
+	public:
+		void func(base a)
+		{
+			cout<<"data"<<a.data<<endl;
+		}
+};
+int main()
+{
+	base  a;
+	derv d;
+	d.func(a);
+	return 0;
+}
