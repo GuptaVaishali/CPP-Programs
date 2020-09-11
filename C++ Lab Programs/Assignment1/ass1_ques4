@@ -1,0 +1,129 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+#include<conio.h>
+
+
+class bank
+{
+	private:
+		char user_id[20],login_id[20],r_passwrd[20],l_passwrd[20],c_passwrd[20];
+		int balance;
+	public:
+	/*	bank()
+		{
+			strcpy(user_id,'\0');
+			strcpy(login_id,'\0');
+			strcpy(r_passwrd,'\0');
+			strcpy(l_passwrd,'\0');
+			balance=0;
+		}*/
+		void create_account()
+		{
+			cout<<"user_id: "<<endl;
+			cin.getline(user_id,20);
+			cout<<"enter password: "<<endl;
+			cin.getline(r_passwrd,20);
+			cout<<"enter confirm password: "<<endl;
+			cin.getline(c_passwrd,20);
+			if(strcmp(r_passwrd,c_passwrd))
+			{
+				create_account();
+			}
+			else
+			{
+				cout<<"registration successful"<<endl;
+			}
+		}
+		void min_balance()
+		{
+			int amount;
+			cout<<"Enter the amount to be deposited (min balance to be maintained:1000): "<<endl;
+			cin>>amount;
+			if(amount<1000)
+			{
+				min_balance();
+			}
+			else
+			{
+				balance=amount;
+				cout<<"Name of customer: "<<user_id<<endl;
+				cout<<"balance of customer: "<<balance<<endl;
+			}
+		}
+		void login()
+		{
+			cout<<"Enter login_id: "<<endl;
+			cin.getline(login_id,20);
+			if(strcmp(login_id,user_id))
+			{
+				login();
+			}
+			else
+			{
+				cout<<"Enter password: "<<endl;
+				cin.getline(l_passwrd,20);
+				if(strcmp(l_passwrd,r_passwrd))
+				{
+					login();
+				}
+				else
+				{
+					cout<<"LOGIN SUCCESSFUL"<<endl;
+				}
+			}
+		}
+		void withdraw()
+		{
+			int amount;
+			cout<<"enter the amount to withdraw: "<<endl;
+			cin>>amount;
+			balance=balance-amount;
+			cout<<"updated balance is: "<<balance<<endl;
+		}
+		void deposit()
+		{
+			int amount;
+			cout<<"Enter the amount to be deposited: "<<endl;
+			cin>>amount;
+			balance=balance+amount;
+			cout<<"Updated balance is: "<<balance<<endl;
+		}
+		void show_balance()
+		{
+			cout<<"your balance is: "<<balance<<endl;
+		}
+};
+int main()
+{
+	bank b1;
+	int a;
+	b1.create_account();
+	cout<<endl;
+	b1.min_balance();
+	cout<<endl;
+	b1.login();
+	cout<<endl;
+//	clrscr();
+	cout<<"choose the operation to be performed: "<<endl;
+	cout<<endl;
+	while(1)
+	{
+	cout<<"1.Withdraw "<<endl;
+	cout<<"2.Deposit "<<endl;
+	cout<<"3.Show Balance "<<endl;
+	cout<<"4.Exit "<<endl;
+	cin>>a;
+	switch(a)
+	{
+		case 1: b1.withdraw();
+				break;
+		case 2: b1.deposit();
+				break;
+		case 3: b1.show_balance();
+				break;
+		case 4: exit(1);
+	}
+}
+	return 0;
+}
